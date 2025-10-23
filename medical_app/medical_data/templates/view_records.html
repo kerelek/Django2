@@ -1,0 +1,61 @@
+﻿{% extends 'medical_data/base.html' %}
+
+{% block content %}
+<h2 class="mb-4">Все медицинские записи (из JSON файлов)</h2>
+
+{% if records %}
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Пациент</th>
+                <th>Возраст</th>
+                <th>Пол</th>
+                <th>Рост</th>
+                <th>Вес</th>
+                <th>ИМТ</th>
+                <th>Давление</th>
+                <th>ЧСС</th>
+                <th>Темп.</th>
+                <th>Диагноз</th>
+                <th>Файл</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in records %}
+            <tr>
+                <td>{{ record.data.patient_name }}</td>
+                <td>{{ record.data.age }}</td>
+                <td>
+                    {% if record.data.gender == 'M' %}
+                    Мужской
+                    {% else %}
+                    Женский
+                    {% endif %}
+                </td>
+                <td>{{ record.data.height }} см</td>
+                <td>{{ record.data.weight }} кг</td>
+                <td>
+                    {% widthratio record.data.weight record.data.height|div:100 record.data.height|div:100 as bmi %}
+                    {{ bmi|floatformat:1 }}
+                </td>
+                <td>{{ record.data.blood_pressure }}</td>
+                <td>{{ record.data.heart_rate }}</td>
+                <td>{{ record.data.temperature }}°C</td>
+                <td>{{ record.data.diagnosis }}</td>
+                <td>
+                    <small class="text-muted">{{ record.filename }}</small>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="alert alert-info">
+    Нет медицинских записей.
+    <a href="{% url 'create_record' %}" class="alert-link">Создайте первую запись</a>
+    или <a href="{% url 'upload_json' %}" class="alert-link">загрузите JSON файл</a>.
+</div>
+{% endif %}
+{% endblock %}
