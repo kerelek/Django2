@@ -1,4 +1,3 @@
-# medical_data/models.py
 import os
 import uuid
 from django.db import models
@@ -11,7 +10,6 @@ def validate_json_extension(value):
         raise ValidationError('Разрешены только файлы JSON.')
 
 def medical_json_file_path(instance, filename):
-    # Генерируем безопасное имя файла
     ext = '.json'
     filename = f"medical_data_{uuid.uuid4()}{ext}"
     return os.path.join('medical_json', filename)

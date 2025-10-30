@@ -1,0 +1,14 @@
+{
+  "id": "5f796d3e-d1e7-42d4-a6fa-27b1583cda48",
+  "patient_name": "if form.is_valid():",
+  "age": 24,
+  "gender": "M",
+  "height": 124.0,
+  "weight": 124.0,
+  "blood_pressure": "if",
+  "heart_rate": 124,
+  "temperature": 36.6,
+  "symptoms": "if form.is_valid():",
+  "diagnosis": "if form.is_valid():",
+  "created_at": "2025-10-30T05:43:20.850917+00:00"
+}

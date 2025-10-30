@@ -1,9 +1,7 @@
-# medical_data/forms.py
 from django import forms
-from .models import JSONFile  # Импортируем только JSONFile
+from .models import JSONFile 
 
 class MedicalRecordForm(forms.Form):
-    """Форма для создания медицинской записи без использования модели"""
     GENDER_CHOICES = [
         ('M', 'Мужской'),
         ('F', 'Женский'),
@@ -83,7 +81,6 @@ class JSONUploadForm(forms.ModelForm):
     
     def clean_file(self):
         file = self.cleaned_data['file']
-        # Дополнительная проверка размера файла
         if file.size > 5 * 1024 * 1024:  # 5MB
             raise forms.ValidationError("Файл слишком большой. Максимальный размер: 5MB")
         return file
